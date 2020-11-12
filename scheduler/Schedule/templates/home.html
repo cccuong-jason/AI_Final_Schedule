@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Cuong Scheduler</h1>
+    <div>
+        {% for s in schedule %}
+        <div>
+            {{ s.name }}
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

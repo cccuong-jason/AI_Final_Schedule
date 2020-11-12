@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<body>
+    {% if messages %}
+    {% for message in messages  %}
+        <div class="alert alert-success" role="alert">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
+    <fieldset class="fieldset">
+        <a href="{% url 'addinstructors'%}"><h1 class="tablink" onclick="openPage('new')" id="defaultOpen">Add Instructor</h1></a>
+        <div class="tabcontent" id="edit">
+            <table class="table1">
+                <thead>
+                <tr class="table-headers">
+                <th>ID</th>
+                <th>Name</th>
+                <th  class="empty">Delete</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for inst in instructors %}
+                <tr>
+                <td>{{inst.Ins_id}}</td>
+                <td>{{inst.Ins_name}}</td>
+                <td class="empty">
+                    <form action="{% url 'deleteinstructors' inst.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="X" class="cross" id="toast">
+                    </form>
+                </td> 
+                </tr>
+                {% endfor %}       
+                </tbody>
+            </table>
+        </div>    
+        
+    </fieldset>
+</body>
+
+{% endblock %}

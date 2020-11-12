@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+<!-- Where all the magic happens -->
+<!-- LOGIN FORM -->
+{% block content %}
+{% if messages %}
+    {% for message in messages  %}
+	{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+		<div class="alert alert-success" role="alert">{{ message }}</div>
+	{% endif %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+		<div class="alert alert-warning" role="alert">{{ message }}</div>
+	{% endif %}    
+	{% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+		<div class="alert alert-info" role="alert">{{ message }}</div>
+	{% endif %}  
+    {% endfor %}
+{% endif %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/roomlist.css' %}">
+</head>
+<body>
+    <div class="text-center" style="margin-left: -50px;">
+        <h1 class="logo">Add Room</h1>
+        <!-- Main Form -->
+        <div class="login-form-1">
+            <form id="login-form" class="text-left" method="post" >
+            {% csrf_token %}
+                <div class="login-form-main-message"></div>
+                <div class="main-login-form">
+                    <div class="login-group">
+                        <div class="form-group">
+                            <label for="r_number" class="sr-only">Room ID</label>
+                            <input type="text" class="form-control" id="r_number" name="r_number" placeholder="Room ID" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="r_name" class="sr-only">Room Name</label>
+                            <input type="text" class="form-control" id="r_name" name="r_name" placeholder="Room Name" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
+                </div>
+            </form>
+        </div>
+        <!-- end:Main Form -->
+    </div>
+    <div class="text-center">
+        <h1 class="logo">Available Room</h1>
+        
+        <div class="row">
+            {% for r in room%}
+            <div class="col-md-3 col-sm-6">
+              <div class="card card-block">
+                <h4 class="card-title text-right"><i class="material-icons">settings</i></h4>
+                    <h5 class="card-title mt-3 mb-3">{{ r.r_name }}</h5>
+                </div>
+            </div>   
+            {% endfor %} 
+        </div> 
+        
+    </div>
+</body>
+
+{% endblock %}

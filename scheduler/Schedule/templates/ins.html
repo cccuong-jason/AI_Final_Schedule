@@ -1,0 +1,31 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block content %}
+{% if messages %}
+    {% for message in messages  %}
+	{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+		<div class="alert alert-success" role="alert">{{ message }}</div>
+	{% endif %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+		<div class="alert alert-warning" role="alert">{{ message }}</div>
+	{% endif %}    
+	{% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+		<div class="alert alert-info" role="alert">{{ message }}</div>
+	{% endif %}  
+    {% endfor %}
+{% endif %}
+<form method="post">
+	{% csrf_token %}
+	<fieldset>
+		<h1 class="tablink" onclick="openPage('new')" id="defaultOpen">Add Instructor</h1>
+		<a href="{% url 'editinstructors' %}"><h1 class="tablink" onclick="openPage('edit')" id="link_to_edit">Edit Instructor</h1></a>
+		<div class="tabcontent" id="new">
+			{{ form.as_p }}
+		<input type="submit" value="Submit" class="submit">
+		</div>
+	</fieldset>   
+</form>
+<div class="img">
+	<img src="{% static 'image/teacher.svg' %}">
+</div>
+{% endblock %}
