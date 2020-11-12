@@ -55,11 +55,7 @@ button
     top: 680px;
     left: 190px;
 }
-.card
-{
-	right: 250px;
-	position: absolute;
-}
+
 .card .txt{
 	position:inherit;
 	top: 180px;

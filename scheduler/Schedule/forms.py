@@ -10,7 +10,6 @@ class RoomForm(ModelForm):
             'r_name'
         ]
 
-
 class InstructorForm(ModelForm):
     class Meta:
         model = Instructors

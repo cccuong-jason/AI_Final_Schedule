@@ -1,8 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages 
 from .forms import *
 from .models import *
+from django.urls import reverse_lazy
+from bootstrap_modal_forms.generic import BSModalCreateView
 post = [
     {
         'name': 'Cuong',
@@ -46,7 +48,7 @@ def add_instructor(request):
             return render(request, 'ins.html', context)
         dup = True
     if dup == True:
-        messages.warning(request, "Duplicated Ins_id!")
+        messages.error(request, "Duplicated Ins_id!")
         context = {
             'form': form,
             'dup': True
@@ -94,7 +96,7 @@ def add_room(request):
             return render(request, 'room.html', context)
         dup = True
     if dup == True:
-        messages.warning(request, "Duplicated Id or Name!")
+        messages.error(request, "Duplicated Id or Name!")
         context = {
             'form': form,
             'dup': True,
@@ -114,7 +116,34 @@ def add_room(request):
             'dup': '',
             'room': Room.objects.all()
         }
-    print(Room.objects.all())
     return render(request, 'room.html', context)
 
+def delete_room(request, pk):
+    inst = Room.objects.filter(pk=pk)
+    print('Inst: ',inst)
+    if request.method == 'POST':
+        inst.delete()
+        messages.success(request, "Successfully deleted!")
+        return redirect('addrooms')
+
+def update_room(request, pk):
+    room = Room.objects.get(id=pk)
+    form = RoomForm(instance=room)
+    if request.method == 'POST':
+        form = RoomForm(request.POST, instance=room)
+        if form.is_valid() and (Room.objects.filter(r_number=request.POST['r_number']).exists() == False or Room.objects.filter(r_name=request.POST['r_name']).exists() == False):
+            form.save()
+            messages.success(request, "Successfully Room Edited!")
+            return redirect('addrooms')
+    messages.error(request, "Duplicated Id or Name!")
+    context = {
+        'form': form,
+        'room': Room.objects.all()
+    }
+    return render(request, 'room.html', context)
+
+
+
+
 # Create your views here.
+
