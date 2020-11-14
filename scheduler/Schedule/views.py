@@ -4,7 +4,6 @@ from django.contrib import messages
 from .forms import *
 from .models import *
 from django.urls import reverse_lazy
-from bootstrap_modal_forms.generic import BSModalCreateView
 post = [
     {
         'name': 'Cuong',
@@ -86,7 +85,7 @@ def add_room(request):
     if request.method == 'POST':
         if form.is_valid() and (Room.objects.filter(r_number=request.POST['r_number']).exists() == False and Room.objects.filter(r_name=request.POST['r_name']).exists() == False) :
             form.save()
-            rdup = False
+            dup = False
             messages.success(request, "Successfully Room Added!")
             context = {
                 'form': form,
@@ -142,7 +141,76 @@ def update_room(request, pk):
     }
     return render(request, 'room.html', context)
 
+def add_subject(request):
+    dup = ''
+    print(request.POST)
+    print(len(request.POST.get('sj_ins')))
+    form = SubjectForm(request.POST or None)
+    print(form)
+    objectlist = Instructors.objects.values('Ins_name').order_by('Ins_id')
+    if request.method == 'POST':
+        if form.is_valid() and (Subject.objects.filter(sj_id=request.POST['sj_id']).exists() == False and Subject.objects.filter(sj_name=request.POST['sj_name']).exists() == False) :
+            form.save()
+            dup = False
+            messages.success(request, "Successfully Subject Added!")
+            context = {
+                'form': form,
+                'dup': False,
+                'subject': Subject.objects.all(),
+                'list_ins': objectlist
+            }
+            return render(request, 'subject.html', context)
+        dup = True
+    print(dup)
+    if dup == True:
+        messages.error(request, "Duplicated Id or Name!")
+        context = {
+            'form': form,
+            'dup': True,
+            'subject': Subject.objects.all(),
+            'list_ins': objectlist
+        }
+    elif dup == False:
+        messages.success(request, "Successfully Subject Added!")
+        context = {
+            'form': form,
+            'dup': False,
+            'subject': Subject.objects.all(),
+            'list_ins': objectlist
+        }
+    else:
+        messages.info(request, "You can add or delete Subject here!")
+        context = {
+            'form': form,
+            'dup': '',
+            'subject': Subject.objects.all(),
+            'list_ins': objectlist
+        }
+    return render(request, 'subject.html', context)
 
+def delete_subject(request, pk):
+    inst = Subject.objects.filter(pk=pk)
+    print('Inst: ',inst)
+    if request.method == 'POST':
+        inst.delete()
+        messages.success(request, "Successfully deleted!")
+        return redirect('addsubjects')
+
+def update_subject(request, pk):
+    room = Subject.objects.get(id=pk)
+    form = SubjectForm(instance=room)
+    if request.method == 'POST':
+        form = SubjectForm(request.POST, instance=room)
+        if form.is_valid() and (Subject.objects.filter(sj_id=request.POST['sj_id']).exists() == False or Subject.objects.filter(sj_name=request.POST['sj_name']).exists() == False):
+            form.save()
+            messages.success(request, "Successfully Subject Edited!")
+            return redirect('addsubjects')
+    messages.error(request, "Duplicated Id or Name!")
+    context = {
+        'form': form,
+        'subject': Subject.objects.all()
+    }
+    return render(request, 'subject.html', context)
 
 
 # Create your views here.

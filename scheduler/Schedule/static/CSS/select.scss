@@ -1,0 +1,118 @@
+body {
+	text-align: center;
+	background-color: #222;
+	color: #fff;
+	margin-top: 50px;
+	.dropdown-menu {
+		border-radius: 0;
+	}
+	.multiselect-native-select {
+		position: relative;
+		select {
+			border: 0 !important;
+			clip: rect(0 0 0 0) !important;
+			height: 1px !important;
+			margin: -1px -1px -1px -3px !important;
+			overflow: hidden !important;
+			padding: 0 !important;
+			position: absolute !important;
+			width: 1px !important;
+			left: 50%;
+			top: 30px;
+		}
+	}
+	.multiselect-container {
+		position: absolute;
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		.input-group {
+			margin: 5px;
+		}
+		li {
+			padding: 0;
+			.multiselect-all {
+				label {
+					font-weight: 700;
+				}
+			}
+			a {
+				padding: 0;
+				label {
+					margin: 0;
+					height: 100%;
+					cursor: pointer;
+					font-weight: 400;
+					padding: 3px 20px 3px 40px;
+					input[type=checkbox] {
+						margin-bottom: 5px;
+					}
+				}
+				label.radio {
+					margin: 0;
+				}
+				label.checkbox {
+					margin: 0;
+				}
+			}
+		}
+		li.multiselect-group {
+			label {
+				margin: 0;
+				padding: 3px 20px 3px 20px;
+				height: 100%;
+				font-weight: 700;
+			}
+		}
+		li.multiselect-group-clickable {
+			label {
+				cursor: pointer;
+			}
+		}
+	}
+	.btn-group {
+		.btn-group {
+				.multiselect.btn {
+					border-top-left-radius: 4px;
+					border-bottom-left-radius: 4px;
+				}
+		}
+	}
+	.form-inline {
+		.multiselect-container {
+			label.checkbox {
+				padding: 3px 20px 3px 40px;
+			}
+			label.radio {
+				padding: 3px 20px 3px 40px;
+			}
+			li {
+				a {
+					label.checkbox {
+						input[type=checkbox] {
+							margin-left: -20px;
+							margin-right: 0;
+						}
+					}
+					label.radio {
+						input[type=radio] {
+							margin-left: -20px;
+							margin-right: 0;
+						}
+					}
+				}
+			}
+		}
+	}
+	.btn {
+		border-radius: 0;
+		padding: 10px 0;
+	}
+	.btn-primary {
+		background-color: #ff0000;
+		border: none;
+		border-radius: 0;
+		padding: 11px 15px;
+		text-transform: uppercase;
+	}
+}
