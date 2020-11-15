@@ -35,8 +35,10 @@ def home(request):
 def add_instructor(request):
     dup = ''
     form = InstructorForm(request.POST or None)
+    print(request.POST)
     if request.method == 'POST':
         if form.is_valid() and Instructors.objects.filter(Ins_id=request.POST['Ins_id']).exists() == False:
+            print('Here')
             form.save()
             dup = False
             messages.success(request, "Successfully Added!")
@@ -143,11 +145,9 @@ def update_room(request, pk):
 
 def add_subject(request):
     dup = ''
-    print(request.POST)
-    print(len(request.POST.get('sj_ins')))
     form = SubjectForm(request.POST or None)
-    print(form)
-    objectlist = Instructors.objects.values('Ins_name').order_by('Ins_id')
+    objectlist = Instructors.objects.all()
+    n = Subject.sj_ins.through.objects.all()
     if request.method == 'POST':
         if form.is_valid() and (Subject.objects.filter(sj_id=request.POST['sj_id']).exists() == False and Subject.objects.filter(sj_name=request.POST['sj_name']).exists() == False) :
             form.save()
@@ -157,7 +157,8 @@ def add_subject(request):
                 'form': form,
                 'dup': False,
                 'subject': Subject.objects.all(),
-                'list_ins': objectlist
+                'list_ins': objectlist,
+                'table': n
             }
             return render(request, 'subject.html', context)
         dup = True
@@ -168,7 +169,8 @@ def add_subject(request):
             'form': form,
             'dup': True,
             'subject': Subject.objects.all(),
-            'list_ins': objectlist
+            'list_ins': objectlist,
+            'table': n
         }
     elif dup == False:
         messages.success(request, "Successfully Subject Added!")
@@ -176,7 +178,8 @@ def add_subject(request):
             'form': form,
             'dup': False,
             'subject': Subject.objects.all(),
-            'list_ins': objectlist
+            'list_ins': objectlist,
+            'table': n
         }
     else:
         messages.info(request, "You can add or delete Subject here!")
@@ -184,7 +187,8 @@ def add_subject(request):
             'form': form,
             'dup': '',
             'subject': Subject.objects.all(),
-            'list_ins': objectlist
+            'list_ins': objectlist,
+            'table': n
         }
     return render(request, 'subject.html', context)
 
