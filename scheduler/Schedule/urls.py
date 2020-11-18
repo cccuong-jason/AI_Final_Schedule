@@ -12,5 +12,6 @@ urlpatterns = [
     path('add_room/<int:pk>/update_room/', views.update_room, name='updaterooms'),
     path('add_subject/', views.add_subject, name='addsubjects'),
     path('delete_subject/<int:pk>/', views.delete_subject, name='deletesubjects'),
-    path('add_subject/<int:pk>/update_subject/', views.update_subject, name='updatesubjects')
+    path('add_subject/<int:pk>/update_subject/', views.update_subject, name='updatesubjects'),
+    # path('add_shift/', views.add_shift, name=addshifts)
     ]

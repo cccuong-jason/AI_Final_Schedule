@@ -22,3 +22,5 @@ class SubjectForm(ModelForm):
     class Meta:
         model = Subject
         fields = ['sj_id', 'sj_name', 'sj_ins','sj_classes']
+        if 'sj_ins' not in fields:
+            fields = ['sj_id','sj_name','sj_classes']
