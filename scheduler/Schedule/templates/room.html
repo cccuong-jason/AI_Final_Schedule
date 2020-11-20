@@ -4,22 +4,23 @@
 {% if messages %}
     {% for message in messages  %}
 	{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-		<div class="alert alert-success" style="margin-top: -20px;" role="alert"><i class="fa fa-check-circle"></i>&nbsp;{{ message }}</div>
+		<div class="alert alert-success" style="margin-top: -20px;" role="alert"><i class="fa fa-check-circle"></i>&nbsp;<strong>{{ message }}</strong></div>
 	{% endif %}
     {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
-		<div class="alert alert-warning" style="margin-top: -20px;" role="alert"><i class="fa fa-exclamation-circle"></i>&nbsp;{{ message }}</div>
+		<div class="alert alert-warning" style="margin-top: -20px;" role="alert"><i class="fa fa-exclamation-circle"></i>&nbsp;<strong>{{ message }}</strong></div>
 	{% endif %}    
 	{% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
-		<div class="alert alert-info" style="margin-top: -20px;" role="alert"><i class="fa fa-info-circle"></i>&nbsp;{{ message }}</div>
+		<div class="alert alert-info" style="margin-top: -20px;" role="alert"><i class="fa fa-info-circle"></i>&nbsp;<strong>{{ message }}</strong></div>
   {% endif %}
   {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-		<div class="alert alert-danger" style="margin-top: -20px;" role="alert"><i class="fa fa-times-circle"></i>&nbsp;{{ message }}</div>
+		<div class="alert alert-danger" style="margin-top: -20px;" role="alert"><i class="fa fa-times-circle"></i>&nbsp;<strong>{{ message }}</strong></div>
 	{% endif %}  
     {% endfor %}
 {% endif %}
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'CSS/roomlist.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'CSS/table.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/style.css' %}">
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>

@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% if messages %}
+    {% for message in messages  %}
+	{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+		<div class="alert alert-success" style="margin-top: -20px;" role="alert"><i class="fa fa-check-circle"></i>&nbsp;<strong>{{ message }}</strong></div>
+	{% endif %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+		<div class="alert alert-warning" style="margin-top: -20px;" role="alert"><i class="fa fa-exclamation-circle"></i>&nbsp;<strong>{{ message }}</strong></div>
+	{% endif %}    
+	{% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+		<div class="alert alert-info" style="margin-top: -20px;" role="alert"><i class="fa fa-info-circle"></i>&nbsp;<strong>{{ message }}</strong></div>
+  {% endif %}
+  {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+		<div class="alert alert-danger" style="margin-top: -20px;" role="alert"><i class="fa fa-times-circle"></i>&nbsp;<strong>{{ message }}</strong></div>
+	{% endif %}  
+    {% endfor %}
+{% endif %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/roomlist.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/table.css' %}">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+</head>
+<body>
+    <div class="text-center" style="margin-left: -50px;">
+        <h1 class="logo text-center" style="color: #222831;">Add Shift</h1>
+        <!-- Main Form -->
+        <div class="login-form-1">
+            <form id="login-form" class="text-left" method="post" >
+            {% csrf_token %}
+                <div class="login-form-main-message"></div>
+                <div class="main-login-form">
+                    <div class="login-group">
+                        <div class="form-group">
+                            <label for="sid" class="sr-only">Shift ID</label>
+                            <input type="text" class="form-control" id="sid" name="sid" placeholder="Shift ID" required>
+                        </div>
+                        <div class="form-group" style="padding: 10px;">
+                            <label for="time" class="sr-only">Shift Name</label>
+                            <select id="time" name="time" class="selectpicker" title="Select Shift"   data-live-search="true" data-actions-box="true">
+                                  <option value="Shift 1" title="Shift 1">6:50 - 9:15</option>
+                                  <option value="Shift 2" title="Shift 2">9:25 - 11:50</option>
+                                  <option value="Shift 3" title="Shift 3">12:30 - 14:55</option>
+                                  <option value="Shift 4" title="Shift 4">15:05 - 17:30</option>
+                                  <option value="Shift 5" title="Shift 5">17:45 - 21:00</option>
+                          </select>
+                        </div>
+                        <div class="form-group" style="margin: 10px;">
+                            <label for="day" class="sr-only">Shift Day</label>
+                            <select id="day" name="day" class="selectpicker" title="Select Shift"  data-live-search="true" data-actions-box="true">
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday">Friday</option>
+                                <option value="Saturday">Saturday</option>
+                            </select>                                                    
+                        </div>
+                    </div>
+                    <button type="submit" class="login-button"><i class="fa fa-chevron-right"></i></button>
+                </div>
+            </form>
+        </div>
+        <!-- end:Main Form -->
+    </div>
+    <div class="text-center">
+        <h1 class="logo" style="color: #222831;">Available Shift</h1> 
+        <div class="container">
+    <div class="row" style="justify-content: center;">    
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default panel-table">
+              <div class="panel-body">
+                <table class="table table-striped table-bordered table-list">
+                  <thead>
+                    <tr>
+                        <th><em class="fa fa-cog"></em></th>
+                        <th class="hidden-xs">ID</th>
+                        <th>Shift Number</th>
+                        <th>Shift</th>
+                        <th>Day</th>
+                    </tr> 
+                  </thead>
+                  <tbody>
+                    {%  for sh in shift  %}
+                          <tr>
+                            <td align="center">
+                            <form action="{% url 'deleteshifts' sh.id %}" method="post">
+                            {% csrf_token %}
+                                <button type="submit" class="btn btn-danger"><em class="fa fa-trash"></em></button>
+                            </form>
+                            <form action="{% url 'deleteshifts' sh.id %}" method="post">
+                              {% csrf_token %}
+                              <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default{{sh.id}}"><em class="fa fa-pencil"></em></button>
+                            </form>
+                            </td>
+                            <td class="hidden-xs">{{  sh.id  }}</td>
+                            <td>{{ sh.sid }}</td>
+                            <td>{{ sh.time }}</td>
+                            <td>{{ sh.day }}</td>
+                          </tr>
+                           <div class="modal fade" id="modal-default{{sh.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Edit Shift</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <form action="{% url 'updateshifts' sh.id %}" id="login-form"  method="post" >
+                                    {% csrf_token %}
+                                        <div>
+                                              <div class="text-left">
+                                                <h6>Shift ID</h6>
+                                              </div>
+                                              <label for="sid" class="sr-only">Shift ID</label>
+                                              <input type="text" class="form-control" id="sid" name="sid" placeholder="Shift ID" required value={{ sh.sid }}>
+                                              <div class="text-left">
+                                                <h6>Shift Name</h6>
+                                              <div style="border: 5px;">Choosen: {{sh.time}}</div>
+                                              <label for="id_time" class="sr-only">Shift Name</label>
+                                              <select id="id_time" type="text" name="time" class="form-control" title="Select Shift"   data-live-search="true" data-actions-box="true">
+                                                <optgroup label="Shift">
+                                                  <option value="Shift 1" {%  if sh.time == 'Shift 1' %} selected="selected" {% endif %}>6:50 - 9:15</option>
+                                                  <option value="Shift 2" {%  if sh.time == 'Shift 2' %} selected="selected" {% endif %}>9:25 - 11:50</option>
+                                                  <option value="Shift 3" {%  if sh.time == 'Shift 3' %} selected="selected" {% endif %}>12:30 - 14:55</option>
+                                                  <option value="Shift 4" {%  if sh.time == 'Shift 4' %} selected="selected" {% endif %}>15:05 - 17:30</option>
+                                                  <option value="Shift 5" {%  if sh.time == 'Shift 5' %} selected="selected" {% endif %}>17:45 - 21:00</option>
+                                                </optgroup>
+                                              </select>
+                                              <div class="text-left">
+                                                <h6>Shift Day</h6>
+                                                <h5>Choosen: {{sh.day}}</h5>
+                                              </div>
+                                              <label for="id_day" class="sr-only">Shift Day</label>
+                                              <select id="id_day" type="text" name="day" class="form-control" title="Select Day"  data-live-search="true" data-actions-box="true" value="{{ sh.day }}">
+                                                <option value="Monday" {%  if sh.day == 'Monday' %} selected="selected" {% endif %}>Monday</option>
+                                                <option value="Tuesday" {%  if sh.day == 'Tuesday' %} selected="selected" {% endif %}>Tuesday</option>
+                                                <option value="Wednesday" {%  if sh.day == 'Wednesday' %} selected="selected" {% endif %}>Wednesday</option>
+                                                <option value="Thursday" {%  if sh.day == 'Thursday' %} selected="selected" {% endif %}>Thursday</option>
+                                                <option value="Friday" {%  if sh.day == 'Friday' %} selected="selected" {% endif %}>Friday</option>
+                                                <option value="Saturday" {%  if sh.day == 'Saturday' %} selected="selected" {% endif %}>Saturday</option>
+                                              </select>                                                    
+                                          
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                              </div>
+                            </div>
+                          </div> 
+                    {%  endfor  %}
+                        </tbody>
+                </table>
+            
+              </div>
+</div></div></div>
+
+<!-- Modal -->
+
+    </div>
+</body>
+{% endblock %}

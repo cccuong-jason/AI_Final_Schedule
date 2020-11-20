@@ -5,29 +5,25 @@
 {% if messages %}
     {% for message in messages  %}
 	{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-		<div class="alert alert-success" style="margin-top: -20px;" role="alert"><i class="fa fa-check-circle"></i>&nbsp;{{ message }}</div>
+		<div class="alert alert-success" style="margin-top: -20px;" role="alert"><i class="fa fa-check-circle"></i>&nbsp;<strong>{{ message }}</strong></div>
 	{% endif %}
     {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
-		<div class="alert alert-warning" style="margin-top: -20px;" role="alert"><i class="fa fa-exclamation-circle"></i>&nbsp;{{ message }}</div>
+		<div class="alert alert-warning" style="margin-top: -20px;" role="alert"><i class="fa fa-exclamation-circle"></i>&nbsp;<strong>{{ message }}</strong></div>
 	{% endif %}    
 	{% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
-		<div class="alert alert-info" style="margin-top: -20px;" role="alert"><i class="fa fa-info-circle"></i>&nbsp;{{ message }}</div>
+		<div class="alert alert-info" style="margin-top: -20px;" role="alert"><i class="fa fa-info-circle"></i>&nbsp;<strong>{{ message }}</strong></div>
   {% endif %}
   {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-		<div class="alert alert-danger" style="margin-top: -20px;" role="alert"><i class="fa fa-times-circle"></i>&nbsp;{{ message }}</div>
+		<div class="alert alert-danger" style="margin-top: -20px;" role="alert"><i class="fa fa-times-circle"></i>&nbsp;<strong>{{ message }}</strong></div>
 	{% endif %}  
     {% endfor %}
 {% endif %}
 <head>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-
-<!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'CSS/table.css' %}">
-
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'CSS/table.css' %}">
 </head>
 <body>
   <div style="background: #efefef;">
@@ -56,7 +52,7 @@
                           <select id="sj_classes" name="sj_ins" class="selectpicker" title="Select Instructor" multiple  data-live-search="true" data-actions-box="true">
                             <optgroup label="Instructor">
                               {% for ins in list_ins %}
-                              <option value="{{ ins.id }}" id="sj_ins" name="sj_ins">{{ ins.Ins_name }} </option>
+                              <option value="{{ ins.2 }}" id="sj_ins" name="sj_ins">[{{ins.0}}]&nbsp;{{ ins.1 }}</option>
                               {% endfor %}
                             </optgroup>
                           </select>
@@ -113,26 +109,25 @@
                                   <div class="modal-body">
                                     <form action="{% url 'updatesubjects' s.id %}" id="login-form"  method="post" >
                                       {% csrf_token %}
-                                          <div class="login-form-main-message"></div>
-                                          <div>
+                                          <div class="form-group">
                                                 <div class="text-left">
                                                     <h5>Subject Number</h5>
                                                   </div>
-                                                  <div class="form-group">
+                                                  <div>
                                                       <label for="sj_id" class="sr-only">Subject ID</label>
                                                       <input type="text" class="form-control" id="sj_id" name="sj_id" placeholder="Subject ID" required value="{{s.sj_id}}">
                                                   </div>
                                                   <div class="text-left">
                                                     <h5>Subject Name</h5>
                                                   </div>
-                                                  <div class="form-group">
+                                                  <div>
                                                       <label for="sj_name" class="sr-only">Subject Name</label>
                                                       <input type="text" class="form-control" id="sj_name" name="sj_name" placeholder="Subject Name" required value="{{s.sj_name}}">
                                                   </div>
                                                   <div class="text-left">
                                                     <h5>Subject Classes</h5>
                                                   </div>
-                                                  <div class="form-group">
+                                                  <div>
                                                       <label for="sj_classes" class="sr-only">Subject Classes</label>
                                                       <input type="text" class="form-control" id="sj_classes" name="sj_classes" placeholder="Subject Classes" required value="{{s.sj_classes}}">
                                                   </div>
@@ -142,36 +137,31 @@
                                                   <div>
                                                   {%  for x in insSub %}
                                                     {% if s.id|stringformat:"d"  == x.0|stringformat:"d"  %}
-                                                      <div class="text-left">Instructor: {{x.3}}</div>
+                                                      <li class="text-left">{{x.3}}</li>
                                                     {% endif %}
                                                   {% endfor %}
                                                   </div>
                                                 </div>
-                                                  <div class="form-group" style="float: left;">
+                                                  <div style="float: left;">
                                                     <label for="sj_ins" class="sr-only" style="float: left;">Subject Instructors</label>
-                                                    <select id="sj_ins" name="instructors_id" class="selectpicker" title="Select Instructor" multiple  data-live-search="true" data-actions-box="true">
+                                                      <select id="sj_ins" name="sj_ins" class="form-control inputstl" title="Select Instructor" multiple style="width: 450px;"> 
+                                                        <!-- {% for ins in list_ins %}
+                                                          {% for x in insSub %}                                                          
+                                                              <option value="{{ x.5 }}" {% if s.id|stringformat:"d"  == x.0|stringformat:"d" and ins.Ins_name == x.3 and ins.Ins_id == x.4 %} selected="selected" {% endif %}>[{{ins.Ins_id}}]&nbsp;{{ ins.Ins_name }}</option>
+                                                          {% endfor %}                                                            
+                                                        {% endfor %} -->
                                                         {% for ins in list_ins %}
-                                                        <optgroup>
-                                                          <option value="{{ ins.id }}"  id="sj_ins" name="sj_ins">[{{ins.Ins_id}}]&nbsp;{{ ins.Ins_name}} </option>
-                                                          {% for x in insSub %}
-                                                            {% if s.id|stringformat:"d"  == x.0|stringformat:"d" and ins.Ins_name == x.3 and ins.Ins_id == x.4%}
-                                                            <optgroup label="Choosen">
-                                                              <option value="{{ x.5 }}" selected  id="sj_ins" name="sj_ins">[{{ins.Ins_id}}]&nbsp;{{ ins.Ins_name }}</option>
-                                                            </optgroup>
-                                                            {% endif %}                                                                 
-                                                          {% endfor %}
-                                                        </optgroup> 
-                                                            
+                                                            <option value="{{ ins.2 }}" {%  if s.id in ins.3   %} selected="selected" {%  endif %}">[{{ins.0}}]&nbsp;{{ ins.1 }}</option>                                                          
                                                         {% endfor %}
-                                                    </select>
+                                                      </select>     
                                                   </div>  
                                                 </div>
                                                 <div class="modal-footer">
+                                                  
                                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                  <button type="submit" class="btn btn-primary">Save changes</button>
+                                                  <button type="submit" class="btn btn-info">Save changes</button>
                                                 </div>
-                                          </div>
-                                          
+                                          </div>          
                                       </form>
                                   </div>
                                   
@@ -217,6 +207,26 @@
               </div>
         <!-- end:Main Form -->
     </div>
+    <!-- <script>
+      $(document).ready(function () {
+           $('.selectpicker').change(function () {
+             var values = $('.selectpicker option:selected').map(function() {
+               return this.value; // or $(this).val()
+             }).get();
+             
+             var test = values
+             console.log(test)
+             var arr = []
+             $.each( test, function( index, value ){
+                 arr.push(value)                                                                                                                                                             
+             });
+             console.log(arr) ;
+             $('input:text[name="sj_ins"]').val(test);
+             console.log($('input:text[name="sj_ins"]').val())
+
+           });                                                              
+       });                                                        
+   </script> -->
 </body>
 
 {% endblock %}
