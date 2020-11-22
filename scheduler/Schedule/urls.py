@@ -4,10 +4,11 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('timetable_generation/', views.timetable, name='timetable'),
     #Instructor
     path('add_instructor/', views.add_instructor, name='addinstructors'),
-    path('instructor_list/', views.inst_list_view, name='editinstructors'),
     path('delete_instructor/<int:pk>/', views.delete_instructor, name='deleteinstructors'),
+    path('add_instructor/<int:pk>/update_instructor', views.update_instructor, name='updateinstructors'),
     #Room
     path('add_room/', views.add_room, name='addrooms'),
     path('delete_room/<int:pk>/', views.delete_room, name='deleterooms'),
@@ -28,4 +29,5 @@ urlpatterns = [
     path('add_section/', views.add_section, name='addsections'),
     path('delete_section/<str:pk>/', views.delete_section, name='deletesections'),
     path('add_section/<str:pk>/update_section/', views.update_section, name='updatesections'),
+    path('test/',views.test,name='tests')
     ]

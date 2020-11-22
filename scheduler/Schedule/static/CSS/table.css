@@ -1,5 +1,5 @@
 .panel-table .panel-body{
-    padding:0;
+    padding:0px !important;
   }
   
   .panel-table .panel-body .table-bordered{

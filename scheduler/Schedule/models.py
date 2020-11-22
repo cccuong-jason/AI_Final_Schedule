@@ -1,24 +1,6 @@
 from django.db import models
 
 # Create your models here.
-
-
-# shifts = (
-#     ('Shift 1', '6:50 - 9:15'),
-#     ('Shift 2', '9:25 - 11:50'),
-#     ('Shift 3', '12:30 - 14:55'),
-#     ('Shift 4', '15:05 - 17:30'),
-#     ('Shift 5', '17:45 - 21:00'),
-
-# )
-# DAYS_OF_WEEK = (
-#     ('Monday', 'Monday'),
-#     ('Tuesday', 'Tuesday'),
-#     ('Wednesday', 'Wednesday'),
-#     ('Thursday', 'Thursday'),
-#     ('Friday', 'Friday'),
-#     ('Saturday', 'Saturday')
-# )
 '''
 Instructors Model
 '''
@@ -34,8 +16,10 @@ Room Model
 class Room(models.Model):
     r_number = models.CharField(max_length=5)
     r_name = models.CharField(max_length=5)
+    seating_capacity = models.IntegerField(default=0)
+
     def __str__(self):
-        return f'{self.r_number} {self.r_name}'
+        return f'{self.r_number} {self.r_name} {self.seating_capacity}'
 
 '''
 Subject Model
@@ -44,7 +28,7 @@ class Subject(models.Model):
     sj_id = models.CharField(max_length=6)
     sj_name = models.CharField(max_length=50)
     sj_ins = models.ManyToManyField(Instructors)
-    sj_classes = models.IntegerField()
+    max_numb_students = models.CharField(max_length=65)
 
     @property
     def get_ins(self):

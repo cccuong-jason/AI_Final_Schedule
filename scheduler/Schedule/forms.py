@@ -7,19 +7,17 @@ class RoomForm(ModelForm):
         model = Room
         fields = [
             'r_number',
-            'r_name'
+            'r_name',
+            'seating_capacity'
         ]
     def clean(self):
         cleaned_data = self.cleaned_data
         r_number = cleaned_data.get('r_number')
         qs = Room.objects.filter(r_number__iexact=r_number)
-        print('qs: ',qs)
-        print(self.instance.pk)
         if self.instance:
             qs = qs.exclude(pk=self.instance.pk)
-            print('qs after: ',qs)
         if qs.exists():
-            raise forms.ValidationError("This shift already exists.")
+            raise forms.ValidationError("This Room already exists.")
         return cleaned_data
 
 class InstructorForm(ModelForm):
@@ -29,11 +27,20 @@ class InstructorForm(ModelForm):
             'Ins_id',
             'Ins_name'
         ]
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        Ins_id = cleaned_data.get('Ins_id')
+        qs = Instructors.objects.filter(Ins_id__iexact=Ins_id)
+        if self.instance:
+            qs = qs.exclude(pk=self.instance.pk)
+        if qs.exists():
+            raise forms.ValidationError("This Instructor already exists.")
+        return cleaned_data
         
 class SubjectForm(ModelForm):
     class Meta:
         model = Subject
-        fields = ['sj_id', 'sj_name', 'sj_ins','sj_classes']
+        fields = ['sj_id', 'sj_name', 'sj_ins','max_numb_students']
 
     def clean(self):
         cleaned_data = self.cleaned_data
@@ -41,14 +48,11 @@ class SubjectForm(ModelForm):
         sj_name = cleaned_data.get('sj_name')
         qs = Subject.objects.filter(sj_id__iexact=sj_id)
         qs1 = Subject.objects.filter(sj_name__iexact=sj_name)
-        print('qs: ',qs)
-        print(self.instance.pk)
         if self.instance:
             qs = qs.exclude(pk=self.instance.pk)
             qs1 = qs1.exclude(pk=self.instance.pk)
-            print('qs after: ',qs)
         if qs.exists() and qs1.exists():
-            raise forms.ValidationError("This shift already exists.")
+            raise forms.ValidationError("This Subject already exists.")
         return cleaned_data
         
 
@@ -56,13 +60,7 @@ class ShiftForm(ModelForm):
     class Meta:
         model = Shift
         fields = ['sid','time','day']
-        
-    # def clean(self):
-    #     qs = ShiftForm.Meta.model.objects.filter(sid__iexact=ShiftForm.Meta.fields[0])
-    #     if self.instance:  # not sure if it should be self.instance.pk
-    #         qs = qs.exclude(pk=self.instance.pk)
-    #     if qs.exists():
-    #         raise forms.ValidationError("This shift already exists.") 
+
     def clean(self):
         cleaned_data = self.cleaned_data
         sid = cleaned_data.get('sid')
@@ -76,7 +74,7 @@ class ShiftForm(ModelForm):
             qs1 = qs1.exclude(pk=self.instance.pk)
             qs1 = qs1.exclude(pk=self.instance.pk)
         if qs.exists() and qs1.exists() and qs2.exists():
-            raise forms.ValidationError("This shift already exists.")
+            raise forms.ValidationError("This Shift already exists.")
 
         """ This is the form's clean method, not a particular field's clean method """
         time = cleaned_data.get("time")
@@ -99,7 +97,7 @@ class DepartmentForm(ModelForm):
         if self.instance:
             qs = qs.exclude(pk=self.instance.pk)
         if qs.exists():
-            raise forms.ValidationError("This shift already exists.")
+            raise forms.ValidationError("This department already exists.")
         return cleaned_data
 
 class SectionForm(ModelForm):
@@ -109,11 +107,14 @@ class SectionForm(ModelForm):
     def clean(self):
         cleaned_data = self.cleaned_data
         section_id = cleaned_data.get('section_id')
+        department = cleaned_data.get('department')
         qs = Section.objects.filter(section_id__iexact=section_id)
+        qs1 = Section.objects.filter(department__dept_name__iexact=department)
         if self.instance:
             qs = qs.exclude(pk=self.instance.pk)
-            print(qs)
-        if qs.exists():
+            qs1 = qs1.exclude(pk=self.instance.pk)
+            print(qs,qs1)
+        if qs.exists() and qs1.exists():
             raise forms.ValidationError("This section already exists.")
         print('Cleaned data: ',cleaned_data)
         return cleaned_data

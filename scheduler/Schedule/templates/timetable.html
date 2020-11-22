@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div style="text-align: -webkit-center;">
+  {% for section in sections %}
+  <h2 class="secHead">{{ section.section_id }} ({{ section.department }})</h2>
+  <table class="table2" style="text-align-last: center;">
+    <colgroup>
+      <col>
+      <col>
+      <col>
+      <col>
+      <col>
+      <col>
+    </colgroup>
+    <tr>
+      <th>Class #</th>
+      <th>Subject</th>
+      <th>Room</th>
+      <th>Instructor</th>
+      <th>Shift</th>
+    </tr>
+    {% for class in schedule %}
+    {% if class.section == section.section_id %}
+    <tr>
+      <th>{{class.section_id}}</th>
+      <td>{{class.subject}}</td>
+      <td>{{class.room}}</td>
+      <td>{{class.instructor}}</td>
+      <td>{{class.shift}}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+  </table>
+
+  {% endfor %}
+</div>
+<div style="text-align: -webkit-center;">
+  {% for class in schedule %}
+  <h1 style="color: #f1f6f9;">TIME TABLE - {{class.section}}</h1>
+  <table border="5" cellspacing="0" align="center">
+    <!--<caption>Timetable</caption>-->
+    <tr>
+      <td align="center" height="100" width="200" class="hidden-xs"><br>
+        <b>Period/Day</b></br>
+      </td>
+      <td align="center" height="100" width="200">
+        <b>Monday</b>
+      </td>
+      <td align="center" height="100" width="200">
+        <b>Tuesday</b>
+      </td>
+      <td align="center" height="100" width="200">
+        <b>Wednesday</b>
+      </td>
+      <td align="center" height="100" width="200">
+        <b>Thursday</b>
+      </td>
+      <td align="center" height="100" width="200">
+        <b>Friday</b>
+      </td>
+      <td align="center" height="100" width="200">
+        <b>Saturday</b>
+      </td>
+      <td align="center" height="100" width="200">
+        <b>Sunday</b>
+      </td>
+    </tr>
+    <tr>
+      <td align="center" height="100">
+        <b>Shift 1</b></td>
+      <td align="center" height="100">{% if class.shift.sid == 'M1'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'T1'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'W1'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'Th1'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'F1'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'S1'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'Sn1'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+    </tr>
+    <tr>
+      <td align="center" height="100">
+        <b>Shift 2</b>
+      </td>
+      <td align="center" height="100">{% if class.shift.sid == 'M2'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'T2'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'W2'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'Th2'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'F2'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'S2'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'Sn2'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+    </tr>
+    <tr>
+      <td align="center" height="100">
+        <b>Shift3</b>
+      </td>
+      <td align="center" height="100">{% if class.shift.sid == 'M3'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'T3'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'W3'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'Th3'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'F3'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'S3'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'Sn3'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+    </tr>
+    <tr>
+      <td align="center" height="100">
+        <b>Shift 4</b>
+      </td>
+      <td align="center" height="100">{% if class.shift.sid == 'M4'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'T4'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'W4'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'Th4'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'F4'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'S4'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'Sn4'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+    </tr>
+    <tr>
+      <td align="center" height="100">
+        <b>Shift 5</b>
+      </td>
+      <td align="center" height="100">{% if class.shift.sid == 'M5'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'T5'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'W5'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'Th5'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'F5'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'S5'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+      <td align="center" height="100">{% if class.shift.sid == 'Sn5'%}{{class.instructor}}<br/>{{class.subject}<br/>{{class.room}}{% endif%}</td>
+    </tr>
+  </table>
+  {% endfor %}
+</div>
+
+{% endblock %}

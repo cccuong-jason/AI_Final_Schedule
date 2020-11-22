@@ -2,7 +2,8 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-	font-family: sans-serif;
+	font-family: 'Concert One', cursive;
+
 
 }
 html{
@@ -26,7 +27,7 @@ button
 	position: relative;
 
 }
-.logo h2
+.logo h1
 {   margin-top: 40px;
 	margin-bottom: 20px;
 	letter-spacing: 2px;
@@ -57,18 +58,17 @@ button
 }
 
 .card .txt{
-	position:inherit;
+	position:relative;
 	top: 180px;
 	left: -100px;
 }
-.card .txt h2{
+.card .txt h1{
 	margin-bottom: 20px;
-	color: #38c0b3;
+	color: #f1f6f9;
 }
 .card .crdbtn .btn
 {
-	color: #fff;
-	position: relative;
+
 	background-color: #01d7a7;
 	border-radius: 3px;
 	padding: 16px 36px;
@@ -89,7 +89,6 @@ button
 form {
 
 	margin-top: 3%;
-	margin-left: 18%;
 	margin-right: 12%;
 
 
@@ -107,7 +106,8 @@ form fieldset{
 
 fieldset legend{
 	font-size: 20px;
-	font-family: sans;
+	font-family: 'Concert One', cursive;
+
 
 }
 
@@ -155,7 +155,13 @@ fieldset button
 
 .img img {
 	top: 400px;
-	position: absolute;
+	width: 800px;
+	height: 600px;
+	position: initial;
+	text-align: center;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
 }
 
 .dropdown-check-list {
@@ -207,7 +213,7 @@ fieldset button
 	margin-top: 20px;
 	margin-bottom: 20px;
 	margin-left: 120px;
-	color:#131314;
+	color:#f1f6f9;
 	font-size: 1.8rem;
 }
 
@@ -218,17 +224,13 @@ fieldset button
 
 
 .table2 {
-
-  border: 25px ridge;
-  border-color: #131314;
-  box-shadow: 6px 13px 13px 0px black;
-  background-color: #ebfffa;
+  background-color: #f1f6f9;
   letter-spacing: 1px;
   font-size: 1.0rem;
 }
 
 .table2 td, th {
-  border: 1px solid rgb(190,190,190);
+  border-radius: 2px;
   padding: 10px 20px;
 
 }
@@ -310,3 +312,44 @@ fieldset button
     top: 1500px;
 }
 
+a.btn-get-started {
+	font-weight: 600;
+	font-size: 13px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	display: inline-block;
+	padding: 12px 28px;
+	border-radius: 3px;
+	transition: 0.5s;
+	color: #f1f6f9;
+	cursor: pointer;
+	position: relative;
+	background: #131314;
+	transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+  }
+  
+   a.btn-get-started:hover {
+	color: #9088d4;
+	background-color: #FFF;
+	text-shadow: nthree;
+  }
+  
+   a.btn-get-started:hover::before {
+	left: 0%;
+	right: auto;
+	  width: 100%;
+  }
+  
+	a.btn-get-started::before {
+	display: block;
+	  position: absolute;
+	  top: 0px;
+	  right: 0px;
+	  height: 100%;
+	  width: 0px;
+	  z-index: -1;
+	  content: '';
+	  color: #9088d4 !important;
+	  background:  #FFF;
+	  transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+  }

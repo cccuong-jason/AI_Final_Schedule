@@ -1,11 +1,46 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Cuong Scheduler</h1>
-    <div>
-        {% for s in schedule %}
-        <div>
-            {{ s.name }}
-        </div>
-        {% endfor %}
-    </div>
+{% load static %}
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-4">
+				<div class="card" style="border: none; position: inherit;background-color: #9088d4">
+					<div class="txt">
+						<h1><strong>Class Schedule Generator<br />Author: Cuong & Loc</strong></h1>
+						<p style="font-size: 16px;">Let our Artificial Intelligence schedule your classes.
+							Add your university class details and generate Time Table. This project is created by
+							django
+							framework and html,css</p>
+					</div>
+					<div class="txt">
+						<a class="btn-get-started" href="{% url 'timetable' %}" onclick="myFunction()">Generate Timetable</a>
+					</div>
+				</div>
+				<div id="loading"></div>
+			</div>
+			<div class="col-8">
+				<div>
+					<div class="img">
+						<img src="{% static 'image/timetable3.png' %}">
+					</div>
+					<a href="https://www.freepik.com/free-photos-vectors/calendar">Time-table vector created by
+						stories
+						- www.freepik.com</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		// document.getElementById("overlay").style.display = "none";
+		function myFunction() {
+			document.getElementById("loading").innerHTML = "<div  class='wrapper' style='position: relative; margin-left: -190px; margin-top: 250px;'><div class='circle'></div><div class='circle'></div><div class='circle'></div><div class='shadow'></div><div class='shadow'></div><div class='shadow'></div><span>Loading</span></div>";
+			var overlay = document.getElementById("overlay");
+			overlay.style.display = "block";
+		}
+
+		
+	</script>
+</body>
 {% endblock %}
