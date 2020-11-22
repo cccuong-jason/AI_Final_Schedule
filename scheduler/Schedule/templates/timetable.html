@@ -36,7 +36,7 @@
   {% endfor %}
 </div>
 <div style="text-align: -webkit-center;">
-  {% for class in schedule %}
+  {% for section in sections %}
   <h1 style="color: #f1f6f9;">TIME TABLE - {{class.section}}</h1>
   <table border="5" cellspacing="0" align="center">
     <!--<caption>Timetable</caption>-->
@@ -66,65 +66,203 @@
         <b>Sunday</b>
       </td>
     </tr>
+    
     <tr>
       <td align="center" height="100">
         <b>Shift 1</b></td>
-      <td align="center" height="100">{% if class.shift.sid == 'M1'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'T1'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'W1'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'Th1'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'F1'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'S1'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'Sn1'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-    </tr>
+        
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'M1'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'T1'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'W1'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'Th1'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'F1'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'S1'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'Sn1'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+     </tr>
     <tr>
       <td align="center" height="100">
         <b>Shift 2</b>
       </td>
-      <td align="center" height="100">{% if class.shift.sid == 'M2'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'T2'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'W2'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'Th2'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'F2'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'S2'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'Sn2'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-    </tr>
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'M2'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'T2'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'W2'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'Th2'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'F2'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'S2'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'Sn2'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}    </tr>
     <tr>
       <td align="center" height="100">
         <b>Shift3</b>
       </td>
-      <td align="center" height="100">{% if class.shift.sid == 'M3'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'T3'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'W3'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'Th3'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'F3'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'S3'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'Sn3'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-    </tr>
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'M3'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'T3'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'W3'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'Th3'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'F3'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'S3'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'Sn3'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}    </tr>
     <tr>
       <td align="center" height="100">
         <b>Shift 4</b>
       </td>
-      <td align="center" height="100">{% if class.shift.sid == 'M4'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'T4'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'W4'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'Th4'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'F4'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'S4'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'Sn4'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-    </tr>
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'M4'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'T4'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'W4'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'Th4'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'F4'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'S4'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'Sn4'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}    </tr>
     <tr>
       <td align="center" height="100">
         <b>Shift 5</b>
       </td>
-      <td align="center" height="100">{% if class.shift.sid == 'M5'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'T5'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'W5'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'Th5'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'F5'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'S5'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-      <td align="center" height="100">{% if class.shift.sid == 'Sn5'%}{{class.instructor}}<br/>{{class.subject}}<br/>{{class.room}}{% endif%}</td>
-    </tr>
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'M5'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'T5'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'W5'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'Th5'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'F5'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'S5'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}
+      {% for class in schedule %}
+      {% if class.section == section.section_id and class.shift.sid == 'Sn5'%}
+      <td align="center" height="100"><br/>{{class.subject}}<br/>{{class.room}}</td>
+      {% endif %}
+      {% endfor %}    </tr>
   </table>
   {% endfor %}
 </div>
