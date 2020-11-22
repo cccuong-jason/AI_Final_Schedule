@@ -65,7 +65,7 @@ def delete_instructor(request, pk):
     Ins_id = inst.values_list('Ins_id', flat=True).get(pk=pk)
     Ins_name = inst.values_list('Ins_name', flat=True).get(pk=pk)
     if request.method == 'POST':
-        ins.delete()
+        inst.delete()
         messages.success(request, "Successfully ["+Ins_id+" - "+Ins_name+"] Deleted!")
         return redirect('addinstructors')
 
@@ -75,10 +75,10 @@ Update rooms
 
 def update_instructor(request, pk):
     inst = Instructors.objects.get(id=pk)
-    form = InstructorForm(instance=ins)
+    form = InstructorForm(instance=inst)
     if request.method == 'POST':
-        form = InstructorForm(request.POST, instance=room)
-        if form.is_valid() and (Instructors.objects.filter(Ins_id=request.POST['Ins_id']).exists() == False):
+        form = InstructorForm(request.POST, instance=inst)
+        if form.is_valid() and (Instructors.objects.filter(Ins_id=request.POST['Ins_id']).exclude(pk=pk).exists() == False):
             form.save()
             messages.success(request, "Successfully ["+request.POST['Ins_id']+" - "+request.POST['Ins_name']+"] Edited!")
             return redirect('addinstructors')
@@ -108,7 +108,7 @@ def delete_instructor(request, pk):
     if request.method == 'POST':
         inst.delete()
         messages.success(request, "Successfully ["+Ins_id+" - "+Ins_name+"] Deleted!")
-        return redirect('editinstructors')
+        return redirect('addinstructors')
 
 '''
 Add rooms
@@ -174,7 +174,7 @@ def update_room(request, pk):
     form = RoomForm(instance=room)
     if request.method == 'POST':
         form = RoomForm(request.POST, instance=room)
-        if form.is_valid() and (Room.objects.filter(r_number=request.POST['r_number']).exists() == False or Room.objects.filter(r_name=request.POST['r_name']).exists() == False):
+        if form.is_valid() and (Room.objects.filter(r_number=request.POST['r_number']).exclude(pk=pk).exists() == False or Room.objects.filter(r_name=request.POST['r_name']).exclude(pk=pk).exists() == False):
             form.save()
             messages.success(request, "Successfully ["+request.POST['r_number']+" - "+request.POST['r_name']+"] Edited!")
             return redirect('addrooms')
@@ -299,7 +299,7 @@ def update_subject(request, pk):
     form = SubjectForm(request.POST)
     if request.method == 'POST':
         form = SubjectForm(request.POST, instance=subj)
-        if form.is_valid() and (Subject.objects.filter(sj_id=request.POST['sj_id']).exists() == False or Subject.objects.filter(sj_name=request.POST['sj_name']).exists() == False):
+        if form.is_valid() and (Subject.objects.filter(sj_id=request.POST['sj_id']).exclude(pk=pk).exists() == False or Subject.objects.filter(sj_name=request.POST['sj_name']).exclude(pk=pk).exists() == False):
             #  and (Subject.objects.filter(sj_id=request.POST['sj_id']).exists() == False or Subject.objects.filter(sj_name=request.POST['sj_name']).exists() == False):
             form.save()
             messages.success(request, "Successfully ["+request.POST['sj_id']+" - "+request.POST['sj_name']+"] Edited!")
@@ -563,7 +563,7 @@ def delete_section(request, pk):
     department = sec.values_list('department', flat=True).get(pk=pk)
     if request.method == 'POST':
         sec.delete()
-        messages.success(request, "Successfully ["+section_id+" - "+department+"] Deleted!")
+        messages.success(request, "Successfully ["+str(section_id)+" - "+str(department)+"] Deleted!")
         return redirect('addsections')
 
 '''

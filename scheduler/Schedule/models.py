@@ -36,6 +36,9 @@ class Subject(models.Model):
 
     def __str__(self):
         return f'{self.sj_id} {self.sj_name} {self.sj_ins}'
+    
+    class Meta:
+        unique_together = ('sj_id','sj_name')
 
 
 class Shift(models.Model):

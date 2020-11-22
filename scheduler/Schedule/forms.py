@@ -13,10 +13,13 @@ class RoomForm(ModelForm):
     def clean(self):
         cleaned_data = self.cleaned_data
         r_number = cleaned_data.get('r_number')
+        r_name = cleaned_data.get('r_name')
         qs = Room.objects.filter(r_number__iexact=r_number)
+        qs1 = Room.objects.filter(r_name__iexact=r_name)
         if self.instance:
             qs = qs.exclude(pk=self.instance.pk)
-        if qs.exists():
+            qs1 = qs1.exclude(pk=self.instance.pk)
+        if qs.exists() or qs1.exists():
             raise forms.ValidationError("This Room already exists.")
         return cleaned_data
 
@@ -51,7 +54,7 @@ class SubjectForm(ModelForm):
         if self.instance:
             qs = qs.exclude(pk=self.instance.pk)
             qs1 = qs1.exclude(pk=self.instance.pk)
-        if qs.exists() and qs1.exists():
+        if qs.exists() or qs1.exists():
             raise forms.ValidationError("This Subject already exists.")
         return cleaned_data
         
